@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div class="main">
+		<div class="textDiv">
+			<input type="text" class="Uptext" id="txt1" value="" readonly>
+			<input type="text" class="Downtext" id="txt2" value="0" readonly>
+		</div>
+		<div class="buttonDiv">
+			<table>
+				<tr>
+					<td><button class="btn" onclick="clr()">C</button></td>
+					<td><button class="btn btn-pm" onclick="PMF()">+/-</button></td>
+					<td><button class="btn" onclick="dis('%')">%</button></td>
+					<td><button class="btn btn-f" onclick="dis('/')">	&#247;</button>	</td>
+				</tr>
+				<tr>
+					<td><button class="btn" onclick="dis('7')">7</button></td>
+					<td><button class="btn" onclick="dis('8')">8</button></td>
+					<td><button class="btn" onclick="dis('9')">9</button></td>
+					<td><button class="btn btn-f" onclick="dis('*')">*</button>	</td>
+				</tr>
+				<tr>
+					<td><button class="btn" onclick="dis('4')">4</button></td>
+					<td><button class="btn" onclick="dis('5')">5</button></td>
+					<td><button class="btn" onclick="dis('6')">6</button></td>
+					<td><button class="btn btn-f" onclick="dis('-')">-</button>	</td>
+				</tr>
+				<tr>
+					<td><button class="btn" onclick="dis('1')">1</button></td>
+					<td><button class="btn" onclick="dis('2')">2</button></td>
+					<td><button class="btn" onclick="dis('3')">3</button></td>
+					<td><button class="btn btn-f" onclick="dis('+')">+</button>	</td>
+				</tr>
+				<tr>
+					<td><button class="btn" onclick="dis('0')">0</button></td>
+					<td><button class="btn" readonly> </button></td>
+					<td><button class="btn" onclick="dis('.')">.</button></td>
+					<td><button class="btn btn-eql" onclick="eql()">=</button>	</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function dis(val) 
+		{ 
+			let x = document.getElementById("txt2").value;
+			if(document.getElementById("txt2").value.length>18){
+				document.getElementById("txt2").style.fontSize = "20px";
+			}
+			else if(document.getElementById("txt2").value.length>8){
+				document.getElementById("txt2").style.fontSize = "30px";
+			}
+			if (x != 0) {
+				if(val == "+" || val == "-" || val == "*" || val == "/" || val == "%")
+				{
+					// document.getElementById("txt2").value=x.charAt(x.length-1); 
+					if(x.charAt(x.length-1) == "+" || x.charAt(x.length-1) == "-" || x.charAt(x.length-1) == "*" || x.charAt(x.length-1) == "/" || x.charAt(x.length-1) == "%"){
+						
+						document.getElementById("txt2").value = x.substring(0, x.length-1) + val;
+					}
+					else{
+						document.getElementById("txt2").value+=val; 
+					}
+				}
+				else{
+					document.getElementById("txt2").value+=val; 
+				}
+			}
+			else{
+				document.getElementById("txt2").value=val ;
+			}
+		} 
+		function clr() 
+		{ 
+			document.getElementById("txt1").value = "";
+			document.getElementById("txt2").value = "0"; 
+			document.getElementById("txt2").style.fontSize = "60px";
+
+		} 
+		function eql() 
+		{ 
+
+			let x = document.getElementById("txt2").value 
+			document.getElementById("txt1").value = x;
+			let y = 0;
+			if (x != 0) {
+				if(x.charAt(x.length-1) == "+" || x.charAt(x.length-1) == "-" || x.charAt(x.length-1) == "*" || x.charAt(x.length-1) == "/" || x.charAt(x.length-1) == "%"){
+					y=eval(x.substring(0, x.length-1));
+				}
+				else{
+					y = eval(x) ;
+				}
+			}
+			document.getElementById("txt2").value = y;
+		} 
+
+		function PMF(){
+			let x = document.getElementById("txt2").value 
+			document.getElementById("txt1").value = x;
+			let y = 0;
+			if (x != 0) {
+				if(x.charAt(x.length-1) == "+" || x.charAt(x.length-1) == "-" || x.charAt(x.length-1) == "*" || x.charAt(x.length-1) == "/" || x.charAt(x.length-1) == "%"){
+					y=eval(x.substring(0, x.length-1) * -1);
+				}
+				else{
+					y = eval(x * -1) ;
+				}
+			}
+			document.getElementById("txt2").value = y;
+		}
+	</script>
+</body>
+</html>
