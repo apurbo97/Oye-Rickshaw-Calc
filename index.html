@@ -40,7 +40,7 @@
 				<tr>
 					<td><button class="btn" onclick="dis('0')">0</button></td>
 					<td><button class="btn" readonly> </button></td>
-					<td><button class="btn" onclick="dis('.')">.</button></td>
+					<td><button class="btn" onclick="dot('.')">.</button></td>
 					<td><button class="btn btn-eql" onclick="eql()">=</button>	</td>
 				</tr>
 			</table>
@@ -48,6 +48,23 @@
 	</div>
 
 	<script type="text/javascript">
+		function dot(val){
+			if(val == "."){
+				var f = 0;
+				let x = document.getElementById("txt2").value;
+				for (var i = 0; i < x.length; i++) {
+					if(x.charAt(i) == "."){
+						f=1;
+					}
+					else if(x.charAt(i) == "+" || x.charAt(i) == "-" || x.charAt(i) == "*" || x.charAt(i) == "/" || x.charAt(i) == "%"){
+						f=0;
+					}
+				}
+				if(f==0){
+					dis(".");
+				}
+			}
+		}
 		function dis(val) 
 		{ 
 			let x = document.getElementById("txt2").value;
@@ -57,6 +74,7 @@
 			else if(document.getElementById("txt2").value.length>8){
 				document.getElementById("txt2").style.fontSize = "30px";
 			}
+			
 			if (x != 0) {
 				if(val == "+" || val == "-" || val == "*" || val == "/" || val == "%")
 				{
